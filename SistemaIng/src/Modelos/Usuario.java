@@ -1,7 +1,7 @@
 package Modelos;
 
 public class Usuario {
-    
+    String caso;
     String nombre;
     String contraseña;
     int tipo;
