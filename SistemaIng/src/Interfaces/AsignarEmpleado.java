@@ -5,7 +5,9 @@
  */
 package Interfaces;
 
+import java.util.Calendar;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 
@@ -20,6 +22,11 @@ public class AsignarEmpleado extends javax.swing.JFrame {
      */
     public AsignarEmpleado() {
         initComponents();
+        SpinnerDateModel dm = new SpinnerDateModel();
+        //JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(jSpinner1,"HH,mm");
+        
+        //jSpinner1.setEditor(timeEditor);
+        jSpinner1.setModel(dm);
     }
 
     /**
@@ -82,9 +89,9 @@ public class AsignarEmpleado extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(32, 32, 32)
                 .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,24 +125,27 @@ public class AsignarEmpleado extends javax.swing.JFrame {
                             .addComponent(jCheckBox1)
                             .addComponent(jCheckBox2)
                             .addComponent(jCheckBox3))
-                        .addGap(33, 33, 33)
+                        .addGap(28, 28, 28)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCheckBox1))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox1))
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox2))
@@ -162,17 +172,20 @@ public class AsignarEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        SpinnerDateModel dateModel = new SpinnerDateModel();
-        JSpinner spinner = new JSpinner(dateModel);
-        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(spinner, "HH:mm");
-        spinner.setEditor(timeEditor);
-        spinner.setLocation(50, 50);
-        //JOptionPane.showMessageDialog(jPanel1, spinner);
-        
-        java.sql.Time time = new java.sql.Time(dateModel.getDate().getTime());
-        System.out.println(time);
-        jPanel1.add(spinner,null);
-        jPanel1.setVisible(true);
+//        JPanel jPanel = new JPanel();
+//        SpinnerDateModel dateModel = new SpinnerDateModel();
+//        JSpinner spinner = new JSpinner(dateModel);
+//        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(spinner, "HH:mm");
+//        spinner.setEditor(timeEditor);
+//        spinner.setLocation(50, 50);
+//        //JOptionPane.showMessageDialog(jPanel1, spinner);
+//        
+//        java.sql.Time time = new java.sql.Time(dateModel.getDate().getTime());
+//        System.out.println(time);
+//        jPanel.add(spinner,null);
+//        jPanel.updateUI();
+//        jPanel.repaint();
+//        jPanel.setVisible(true);
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
