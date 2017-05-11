@@ -1,8 +1,8 @@
 
 package Interfaces;
-
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 
@@ -12,12 +12,14 @@ public class AsignarEmpleado extends javax.swing.JFrame {
     
     public AsignarEmpleado() {
         initComponents();
+
         this.setLocationRelativeTo(null);
         Date d = new Date();
          String fecha = (+d.getDate()+"/"+(d.getMonth()+1)+"/"+(d.getYear()+1900));
          String hora = (+(d.getHours())+":"+d.getMinutes());
          FechaInicio.setText(fecha);
          Hora.setText(hora);
+
     }
 
     /**
@@ -83,9 +85,9 @@ public class AsignarEmpleado extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(32, 32, 32)
                 .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,8 +127,9 @@ public class AsignarEmpleado extends javax.swing.JFrame {
                             .addComponent(jCheckBox1)
                             .addComponent(jCheckBox2)
                             .addComponent(jCheckBox3))
-                        .addGap(33, 33, 33)
+                        .addGap(28, 28, 28)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+
                 .addContainerGap(160, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,6 +138,7 @@ public class AsignarEmpleado extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton5)
                 .addContainerGap())
+
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,23 +182,27 @@ public class AsignarEmpleado extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton5)
                             .addComponent(Hora, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        SpinnerDateModel dateModel = new SpinnerDateModel();
-        JSpinner spinner = new JSpinner(dateModel);
-        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(spinner, "HH:mm");
-        spinner.setEditor(timeEditor);
-        spinner.setLocation(50, 50);
-        //JOptionPane.showMessageDialog(jPanel1, spinner);
-        
-        java.sql.Time time = new java.sql.Time(dateModel.getDate().getTime());
-        System.out.println(time);
-        jPanel1.add(spinner,null);
-        jPanel1.setVisible(true);
+//        JPanel jPanel = new JPanel();
+//        SpinnerDateModel dateModel = new SpinnerDateModel();
+//        JSpinner spinner = new JSpinner(dateModel);
+//        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(spinner, "HH:mm");
+//        spinner.setEditor(timeEditor);
+//        spinner.setLocation(50, 50);
+//        //JOptionPane.showMessageDialog(jPanel1, spinner);
+//        
+//        java.sql.Time time = new java.sql.Time(dateModel.getDate().getTime());
+//        System.out.println(time);
+//        jPanel.add(spinner,null);
+//        jPanel.updateUI();
+//        jPanel.repaint();
+//        jPanel.setVisible(true);
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
