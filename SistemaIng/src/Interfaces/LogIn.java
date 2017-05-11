@@ -2,6 +2,7 @@ package Interfaces;
 import Modelos.ConexionBD;
 import Modelos.Usuario;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,6 +12,12 @@ public class LogIn extends javax.swing.JFrame {
     public LogIn() {
         initComponents();
         this.setLocationRelativeTo(null);
+        Date d = new Date();
+         String fecha = (+d.getDate()+"/"+(d.getMonth()+1)+"/"+(d.getYear()+1900));
+         String hora = (+(d.getHours())+":"+d.getMinutes());
+         FechaInicio.setText(fecha);
+         Hora.setText(hora);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -26,6 +33,8 @@ public class LogIn extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         tipoUsuario = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        FechaInicio = new javax.swing.JLabel();
+        Hora = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +66,10 @@ public class LogIn extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vaca1.png"))); // NOI18N
 
+        FechaInicio.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        Hora.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,6 +97,11 @@ public class LogIn extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(141, 141, 141))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Hora, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +125,10 @@ public class LogIn extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(39, 39, 39)
                 .addComponent(jButton1)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addGap(106, 106, 106)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(FechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(Hora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -123,25 +144,33 @@ public class LogIn extends javax.swing.JFrame {
         }else{
             tipo = 2;
         }       
-        Usuario usuario = new Usuario(tfNombreInicio.getText(),tfContraseñaInicio.getText(),tipo);
+        Usuario usuario = new Usuario(tfNombreInicio.getText(),tfContraseñaInicio.getText(),tipo,0);
         ConexionBD conexion = new ConexionBD();        
         conexion.Conectar();
         try {
             conexion.setS(conexion.getConexion().createStatement());
-            conexion.setRs(conexion.getS().executeQuery("SELECT nombre,contraseña,tipo FROM Usuario Where nombre = '"+usuario.getNombre()+"';"));
+            conexion.setRs(conexion.getS().executeQuery("SELECT nombre,contraseña,tipo,verificacion FROM Usuario Where nombre = '"+usuario.getNombre()+"';"));
             if(conexion.getRs().next())  // metodo next hace apuntar al primer elemento obtenido de la consulta y devuelve true si es distinto de null.
             {   // luego obtenemos los valores en orden en el que estan insertados en la base de datos.
                 String a = conexion.getRs().getString("nombre"); 
                 String b = conexion.getRs().getString("contraseña");
                 int c = conexion.getRs().getInt("tipo"); 
+                int v = conexion.getRs().getInt("verificacion");
                 if((a.equals(usuario.getNombre())) && (b.equals(usuario.getContraseña())) && (c == usuario.getTipo())) // uso el metodo equals ya que == devuelve true si comparten el 
                 {                                                                                                      // mismo espacio de memoria equals compara caracteres
                         if(c == 1){
                             this.setVisible(false);   //desaparece la ventana login
                             new VistaGerente().setVisible(true);  // aparece la de gerente
                                   }else{
-                                    this.setVisible(false);
-                                    new VistaEmpleado().setVisible(true);
+                                    if(v==0)
+                                    {
+                                       this.setVisible(false);
+                                       new VerificacionContraseña().setVisible(true);
+                                    }else{
+                                        this.setVisible(false);
+                                        new VistaEmpleado().setVisible(true);
+                                    }
+                                    
                                   }
                 }                
             }else{ 
@@ -169,6 +198,8 @@ public class LogIn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel FechaInicio;
+    private javax.swing.JLabel Hora;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
