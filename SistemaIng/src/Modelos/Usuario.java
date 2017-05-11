@@ -4,19 +4,29 @@ public class Usuario {
     String nombre;
     String contraseña;
     int tipo;
-    
+    int verificacion;
     public Usuario()
     {   
         nombre = null;
         contraseña = null;
         tipo = -1;
+        verificacion = -1;
     }
     
-    public Usuario(String nombre, String pw, int tipo)
+    public Usuario(String nombre, String pw, int tipo,int verificacion)
     {
         this.nombre = nombre;
         this.contraseña = pw;
         this.tipo = tipo;
+        this.verificacion = verificacion;
+    }
+
+    public int getVerificacion() {
+        return verificacion;
+    }
+
+    public void setVerificacion(int verificacion) {
+        this.verificacion = verificacion;
     }
 
     public String getNombre() {
