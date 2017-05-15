@@ -14,7 +14,13 @@ public class LogIn extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         Date d = new Date();
          String fecha = (+d.getDate()+"/"+(d.getMonth()+1)+"/"+(d.getYear()+1900));
-         String hora = (+(d.getHours())+":"+d.getMinutes());
+         String hora;
+         if(d.getMinutes()<10)
+         {
+             hora = (+(d.getHours())+":0"+d.getMinutes());
+         }else{
+             hora = (+(d.getHours())+":"+d.getMinutes());
+         }        
          FechaInicio.setText(fecha);
          Hora.setText(hora);
         
