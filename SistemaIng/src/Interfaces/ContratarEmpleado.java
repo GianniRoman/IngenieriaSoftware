@@ -4,13 +4,18 @@ package Interfaces;
 import Modelos.ConexionBD;
 import Modelos.Empleado;
 import Modelos.Usuario;
+import Modelos.generatorUUID;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.UUID;
 
 public class ContratarEmpleado extends javax.swing.JFrame {
 
     ConexionBD conexion = new ConexionBD();
+    String id = UUID.randomUUID().toString();
+    String uss;
+    
     public ContratarEmpleado() {
         initComponents();
     }
@@ -31,6 +36,8 @@ public class ContratarEmpleado extends javax.swing.JFrame {
         Telefono = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        Usuario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +81,8 @@ public class ContratarEmpleado extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText(" Usuario:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,18 +95,24 @@ public class ContratarEmpleado extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel4)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(jLabel5))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel5)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Nombre)
                             .addComponent(Elegajo)
-                            .addComponent(Telefono)))
+                            .addComponent(Telefono)
+                            .addComponent(Usuario)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(DNI))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(jLabel2)
+                                .addGap(7, 7, 7)
+                                .addComponent(DNI))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(87, 87, 87))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jButton1)
@@ -112,7 +127,11 @@ public class ContratarEmpleado extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -130,7 +149,7 @@ public class ContratarEmpleado extends javax.swing.JFrame {
                     .addComponent(Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jButton1))
         );
 
@@ -138,31 +157,41 @@ public class ContratarEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        System.out.println(DNI.getText());
-        if(DNI.getText().length() == 8)
-       {
-         Empleado nuevoEmpleado = new Empleado(Elegajo.getText(),DNI.getText(),Nombre.getText(),Telefono.getText());
-         conexion.Conectar();
-           try {
-                conexion.setS(conexion.getConexion().createStatement());
-                conexion.setRs(conexion.getS().executeQuery("SELECT * FROM empleado Where dni ='"+nuevoEmpleado.getDni()+"';"));
-                if(conexion.getRs().next())
-                {                  
-                        System.out.println("Dni duplicado, no se puede registrar empleado");
-                }else{
-                    conexion.getS().executeUpdate("INSERT into empleado values('"+nuevoEmpleado.getlegajo()+"','"+nuevoEmpleado.getDni()+"','"+nuevoEmpleado.getNombre()+"','"+nuevoEmpleado.getTelefono()+"');");
-                    Usuario nuevoUsuario = new Usuario(Nombre.getText(),"12345",2,0);
-                    conexion.getS().executeUpdate("INSERT into usuario values ('"+nuevoUsuario.getNombre()+"','"+12345+"','"+2+"');");
-                    this.setVisible(false);
-                    new VistaGerente().setVisible(true);
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex);
-            }
-       }else{
-                // Cartel de que el dni debe ser de 8 digitos.
-        }
+        conexion.Conectar();
         
+        try{
+            uss = Usuario.getText();
+            conexion.setS(conexion.getConexion().createStatement());
+            conexion.setRs(conexion.getS().executeQuery("SELECT * FROM usuario Where nombre ='"+uss+"';"));
+            if(!(conexion.getRs().next())){//preguntar si el nombre de usuario es duplicado
+                System.out.println(DNI.getText());
+                if(DNI.getText().length() == 8)
+               {
+                 Empleado nuevoEmpleado = new Empleado(Elegajo.getText(),DNI.getText(),Nombre.getText(),Telefono.getText());
+                   try {
+                        conexion.setS(conexion.getConexion().createStatement());
+                        conexion.setRs(conexion.getS().executeQuery("SELECT * FROM empleado Where dni ='"+nuevoEmpleado.getDni()+"';"));
+                        if(conexion.getRs().next())
+                        {                  
+                                System.out.println("Dni duplicado, no se puede registrar empleado");
+                        }else{
+                            conexion.getS().executeUpdate("INSERT into empleado values('"+nuevoEmpleado.getlegajo()+"','"+nuevoEmpleado.getDni()+"','"+nuevoEmpleado.getNombre()+"','"+nuevoEmpleado.getTelefono()+"','"+nuevoEmpleado.getId()+"'"+");");
+                            Usuario nuevoUsuario = new Usuario(Usuario.getText(),"12345",2,0,nuevoEmpleado.getDni());
+                            conexion.getS().executeUpdate("INSERT into usuario values ('"+nuevoUsuario.getNombre()+"','"+12345+"','"+2+"','"+0+"','"+nuevoEmpleado.getDni()+"');");
+                            this.setVisible(false);
+                            new VistaGerente().setVisible(true);
+                        }
+                    } catch (SQLException ex) {
+                        System.out.println(ex);
+                    }
+               }else{
+                        // Cartel de que el dni debe ser de 8 digitos.
+                }
+        }
+        }
+        catch(SQLException ex){
+            System.out.println(ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void TelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TelefonoKeyTyped
@@ -203,6 +232,7 @@ public class ContratarEmpleado extends javax.swing.JFrame {
     private javax.swing.JTextField Elegajo;
     private javax.swing.JTextField Nombre;
     private javax.swing.JTextField Telefono;
+    private javax.swing.JTextField Usuario;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -210,5 +240,6 @@ public class ContratarEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }

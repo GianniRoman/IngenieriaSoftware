@@ -3,24 +3,32 @@ package Modelos;
 public class Usuario {
     String nombre;
     String contraseña;
+    String dni;
     int tipo;
     int verificacion;
     public Usuario()
     {   
         nombre = null;
         contraseña = null;
+        dni = null;
         tipo = -1;
         verificacion = -1;
     }
     
-    public Usuario(String nombre, String pw, int tipo,int verificacion)
+    public Usuario(String nombre, String pw, int tipo,int verificacion, String dni)
     {
         this.nombre = nombre;
         this.contraseña = pw;
         this.tipo = tipo;
         this.verificacion = verificacion;
+        this.dni = dni;
     }
+    
 
+    public String getdni(){
+        return dni;
+    }
+    
     public int getVerificacion() {
         return verificacion;
     }
