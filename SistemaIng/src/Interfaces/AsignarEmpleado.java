@@ -16,6 +16,10 @@ public class AsignarEmpleado extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         Date d = new Date();
          String fecha = (+d.getDate()+"/"+(d.getMonth()+1)+"/"+(d.getYear()+1900));
+         if(d.getMinutes()<10)
+         {
+             String hora = (+(d.getHours())+":0"+d.getMinutes());
+         }
          String hora = (+(d.getHours())+":"+d.getMinutes());
          FechaInicio.setText(fecha);
          Hora.setText(hora);

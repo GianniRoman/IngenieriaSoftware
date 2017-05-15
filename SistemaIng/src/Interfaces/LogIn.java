@@ -15,6 +15,7 @@ public class LogIn extends javax.swing.JFrame {
         Date d = new Date();
         String hora;
          String fecha = (+d.getDate()+"/"+(d.getMonth()+1)+"/"+(d.getYear()+1900));
+
          if(d.getMinutes() < 10)
          {
              hora = (+(d.getHours())+":0"+d.getMinutes());
