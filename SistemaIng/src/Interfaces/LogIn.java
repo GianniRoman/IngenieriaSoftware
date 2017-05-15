@@ -13,14 +13,16 @@ public class LogIn extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         Date d = new Date();
+        String hora;
          String fecha = (+d.getDate()+"/"+(d.getMonth()+1)+"/"+(d.getYear()+1900));
-         String hora;
-         if(d.getMinutes()<10)
+
+         if(d.getMinutes() < 10)
          {
              hora = (+(d.getHours())+":0"+d.getMinutes());
-         }else{
+         }else
+         {
              hora = (+(d.getHours())+":"+d.getMinutes());
-         }        
+         } 
          FechaInicio.setText(fecha);
          Hora.setText(hora);
         
@@ -150,12 +152,12 @@ public class LogIn extends javax.swing.JFrame {
         }else{
             tipo = 2;
         }       
-        Usuario usuario = new Usuario(tfNombreInicio.getText(),tfContraseñaInicio.getText(),tipo,0);
+        Usuario usuario = new Usuario(tfNombreInicio.getText(),tfContraseñaInicio.getText(),tipo,0,null);
         ConexionBD conexion = new ConexionBD();        
         conexion.Conectar();
         try {
             conexion.setS(conexion.getConexion().createStatement());
-            conexion.setRs(conexion.getS().executeQuery("SELECT nombre,contraseña,tipo,verificacion FROM Usuario Where nombre = '"+usuario.getNombre()+"';"));
+            conexion.setRs(conexion.getS().executeQuery("SELECT * FROM Usuario Where nombre = '"+usuario.getNombre()+"';"));
             if(conexion.getRs().next())  // metodo next hace apuntar al primer elemento obtenido de la consulta y devuelve true si es distinto de null.
             {   // luego obtenemos los valores en orden en el que estan insertados en la base de datos.
                 String a = conexion.getRs().getString("nombre"); 
@@ -171,7 +173,7 @@ public class LogIn extends javax.swing.JFrame {
                                     if(v==0)
                                     {
                                        this.setVisible(false);
-                                       new VerificacionContraseña().setVisible(true);
+                                       new VerificacionContraseña(usuario).setVisible(true);
                                     }else{
                                         this.setVisible(false);
                                         new VistaEmpleado().setVisible(true);

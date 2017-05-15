@@ -24,10 +24,11 @@ public class ConexionBD {
         }
         
         String url = "jdbc:postgresql://localhost:5432/SistemaIngenieria";
-        String password = "warcraft1";
+        String password = "postgres";
+        String user = "postgres";
         try{
             Class.forName("org.postgresql.Driver");
-            conexion = DriverManager.getConnection(url,"postgres",password);
+            conexion = DriverManager.getConnection(url,user,password);
             
             if(conexion != null)
             {
@@ -37,6 +38,7 @@ public class ConexionBD {
         }catch(Exception e)
         {
             System.out.println("Hubo un problema al conectar la base de datos");
+            System.out.println("Errorx:" + e.getMessage());
             
         }
                
