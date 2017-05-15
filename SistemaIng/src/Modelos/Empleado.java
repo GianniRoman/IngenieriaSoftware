@@ -1,10 +1,14 @@
 package Modelos;
 
+import java.sql.SQLException;
+
 public class Empleado {
+    String id;
     String legajo;
     String dni;
     String nombre;
     String telefono;
+    Productor asignado [] = new Productor [20];
     boolean Sesion;
     
     public Empleado()
@@ -22,6 +26,10 @@ public class Empleado {
         this.nombre = nombre;
         this.telefono = telefono;
         this.Sesion = false;
+    }
+    
+    public String getId(){
+        return id;
     }
 
     public String getlegajo() {
@@ -64,6 +72,16 @@ public class Empleado {
         this.Sesion = Sesion;
     }
     
-    
+    public void AsignarProductor(Productor p){
+//        try{
+//            ConexionBD conexion= new ConexionBD();
+//            conexion.Conectar();
+//            conexion.setS(conexion.getConexion().createStatement());
+//            conexion.setRs(conexion.getS().executeQuery());
+//        }
+//        catch(SQLException ex){
+//            System.out.println("Errorx:" + ex.getMessage());
+//        }
+    }
        
 }

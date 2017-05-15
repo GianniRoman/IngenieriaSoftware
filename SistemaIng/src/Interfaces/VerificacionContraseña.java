@@ -9,9 +9,10 @@ import java.util.logging.Logger;
 
 public class VerificacionContraseña extends javax.swing.JFrame {
 
-   
-    public VerificacionContraseña() {
+   String usr;
+    public VerificacionContraseña(Usuario uss) {
         initComponents();
+        usr = uss.getNombre();
     }
 
     
@@ -99,13 +100,14 @@ public class VerificacionContraseña extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConfirmarContraseña(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarContraseña
-        Usuario usuario = new Usuario(TFNombre.getText(),TFcontraseña.getText(),2,1);
+        //Usuario usuario = new Usuario(TFNombre.getText(),TFcontraseña.getText(),2,1);
+        String pss = TFcontraseña.getText();
         ConexionBD conexion = new ConexionBD();        
         conexion.Conectar();
         try {
             conexion.setS(conexion.getConexion().createStatement());
-            conexion.getS().executeUpdate("DELETE FROM usuario WHERE nombre = '"+usuario.getNombre()+"';");
-            conexion.getS().executeUpdate("INSERT INTO usuario values('"+usuario.getNombre()+"','"+usuario.getContraseña()+"','"+usuario.getTipo()+"','"+usuario.getVerificacion()+"');");  
+            //conexion.getS().executeUpdate("DELETE FROM usuario WHERE nombre = '"+usuario.getNombre()+"';");
+            conexion.getS().executeUpdate("UPDATE usuario SET contraseña = '" +pss+ "', verificacion = 1 Where nombre = '"+usr+"'");  
             this.setVisible(false);
             new LogIn().setVisible(true);
         } catch (SQLException ex) {
@@ -113,14 +115,7 @@ public class VerificacionContraseña extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ConfirmarContraseña
 
-    public static void main(String args[]) {
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VerificacionContraseña().setVisible(true);
-            }
-        });
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TFNombre;
