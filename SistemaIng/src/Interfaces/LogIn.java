@@ -3,8 +3,6 @@ import Modelos.ConexionBD;
 import Modelos.Usuario;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class LogIn extends javax.swing.JFrame {
 
@@ -15,6 +13,7 @@ public class LogIn extends javax.swing.JFrame {
         Date d = new Date();
         String hora;
          String fecha = (+d.getDate()+"/"+(d.getMonth()+1)+"/"+(d.getYear()+1900));
+
          if(d.getMinutes() < 10)
          {
              hora = (+(d.getHours())+":0"+d.getMinutes());
@@ -52,12 +51,6 @@ public class LogIn extends javax.swing.JFrame {
         jLabel5.setText("Nombre");
 
         jLabel6.setText("Contraseña");
-
-        tfNombreInicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNombreInicioActionPerformed(evt);
-            }
-        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Iniciar Sesion");
@@ -190,10 +183,6 @@ public class LogIn extends javax.swing.JFrame {
         }  
         
     }//GEN-LAST:event_IniciarSesion
-
-    private void tfNombreInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNombreInicioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfNombreInicioActionPerformed
 
     public static void main(String args[]) {
         

@@ -1,6 +1,4 @@
-
 package Interfaces;
-
 import Modelos.ConexionBD;
 import java.sql.SQLException;
 
@@ -13,6 +11,7 @@ public class BajaEmpleado extends javax.swing.JFrame {
    
     public BajaEmpleado() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     
