@@ -1,26 +1,21 @@
-
 package Interfaces;
 
 import Modelos.ConexionBD;
 import Modelos.Empleado;
 import Modelos.Usuario;
-import Modelos.generatorUUID;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.UUID;
+
 
 public class ContratarEmpleado extends javax.swing.JFrame {
 
     ConexionBD conexion = new ConexionBD();
-    String id = UUID.randomUUID().toString();
     String uss;
     
     public ContratarEmpleado() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -69,7 +64,7 @@ public class ContratarEmpleado extends javax.swing.JFrame {
         jButton1.setText("Atras");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Atras(evt);
             }
         });
 
@@ -77,7 +72,7 @@ public class ContratarEmpleado extends javax.swing.JFrame {
         jButton2.setText("Aceptar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Aceptar(evt);
             }
         });
 
@@ -156,9 +151,8 @@ public class ContratarEmpleado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        conexion.Conectar();
-        
+    private void Aceptar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Aceptar
+        conexion.Conectar();        
         try{
             uss = Usuario.getText();
             conexion.setS(conexion.getConexion().createStatement());
@@ -175,7 +169,7 @@ public class ContratarEmpleado extends javax.swing.JFrame {
                         {                  
                                 System.out.println("Dni duplicado, no se puede registrar empleado");
                         }else{
-                            conexion.getS().executeUpdate("INSERT into empleado values('"+nuevoEmpleado.getlegajo()+"','"+nuevoEmpleado.getDni()+"','"+nuevoEmpleado.getNombre()+"','"+nuevoEmpleado.getTelefono()+"','"+nuevoEmpleado.getId()+"'"+");");
+                            conexion.getS().executeUpdate("INSERT into empleado values('"+nuevoEmpleado.getlegajo()+"','"+nuevoEmpleado.getDni()+"','"+nuevoEmpleado.getNombre()+"','"+nuevoEmpleado.getTelefono()+"');");
                             Usuario nuevoUsuario = new Usuario(Usuario.getText(),"12345",2,0,nuevoEmpleado.getDni());
                             conexion.getS().executeUpdate("INSERT into usuario values ('"+nuevoUsuario.getNombre()+"','"+12345+"','"+2+"','"+0+"','"+nuevoEmpleado.getDni()+"');");
                             this.setVisible(false);
@@ -185,14 +179,16 @@ public class ContratarEmpleado extends javax.swing.JFrame {
                         System.out.println(ex);
                     }
                }else{
-                        // Cartel de que el dni debe ser de 8 digitos.
+                 // Cartel de que el dni debe ser de 8 digitos.
                 }
-        }
+        }else{
+                //Cartel de nombre de usuario duplicado.
+            }
         }
         catch(SQLException ex){
             System.out.println(ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Aceptar
 
     private void TelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TelefonoKeyTyped
        int e = evt.getKeyChar();
@@ -212,20 +208,11 @@ public class ContratarEmpleado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_DNIKeyTyped
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Atras(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Atras
         this.setVisible(false);
         new VistaGerente().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Atras
 
-   
-    public static void main(String args[]) {
-       
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ContratarEmpleado().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DNI;

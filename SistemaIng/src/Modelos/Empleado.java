@@ -1,9 +1,7 @@
 package Modelos;
 
-import java.sql.SQLException;
 
 public class Empleado {
-    String id;
     String legajo;
     String dni;
     String nombre;
@@ -26,10 +24,6 @@ public class Empleado {
         this.nombre = nombre;
         this.telefono = telefono;
         this.Sesion = false;
-    }
-    
-    public String getId(){
-        return id;
     }
 
     public String getlegajo() {
