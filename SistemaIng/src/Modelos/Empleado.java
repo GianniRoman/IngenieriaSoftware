@@ -6,6 +6,7 @@ public class Empleado {
     String dni;
     String nombre;
     String telefono;
+    String apellido;
     Productor asignado [] = new Productor [20];
     boolean Sesion;
     
@@ -14,16 +15,26 @@ public class Empleado {
         this.legajo = null;
         this.dni  = null;
         this.nombre  = null;
+        this.apellido = null;
         this.telefono = null;
         this.Sesion = false;       
     }
 
-    public Empleado(String elegajo, String dni, String nombre, String telefono) {
+    public Empleado(String elegajo, String dni, String nombre, String telefono,String apellido) {
         this.legajo = elegajo;
         this.dni = dni;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.telefono = telefono;
         this.Sesion = false;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getApellido() {
+        return apellido;
     }
 
     public String getlegajo() {
@@ -64,6 +75,11 @@ public class Empleado {
 
     public void setSesion(boolean Sesion) {
         this.Sesion = Sesion;
+    }
+    
+    @Override
+    public String toString() {
+        return nombre+" "+apellido;
     }
     
     public void AsignarProductor(Productor p){

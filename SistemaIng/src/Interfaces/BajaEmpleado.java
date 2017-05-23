@@ -1,5 +1,6 @@
 package Interfaces;
 import Modelos.ConexionBD;
+import Modelos.Empleado;
 import java.sql.SQLException;
 
 
@@ -14,7 +15,6 @@ public class BajaEmpleado extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -44,8 +44,18 @@ public class BajaEmpleado extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTextPane2);
 
         jButton2.setText("Atras");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Listado Empleados");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Dar Baja");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +139,16 @@ public class BajaEmpleado extends javax.swing.JFrame {
             System.out.println(ex);
         }
     }//GEN-LAST:event_DarBaja
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.setVisible(false);
+        new VistaGerente().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        new ListadoEmpleados().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
