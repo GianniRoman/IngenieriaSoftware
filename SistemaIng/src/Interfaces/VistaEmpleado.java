@@ -62,6 +62,11 @@ public class VistaEmpleado extends javax.swing.JFrame {
         jButton5.setText("Modificar Plantel");
 
         jButton6.setText("Salir");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverAInicio(evt);
+            }
+        });
 
         Hora.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
@@ -117,6 +122,11 @@ public class VistaEmpleado extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void VolverAInicio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverAInicio
+        this.setVisible(false);
+        new LogIn().setVisible(true);
+    }//GEN-LAST:event_VolverAInicio
 
     /**
      * @param args the command line arguments

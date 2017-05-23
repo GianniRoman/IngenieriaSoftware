@@ -33,17 +33,28 @@ public class BajaEmpleado extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         jLabel1.setText("Legajo");
 
+        legajo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterLegajo(evt);
+            }
+        });
+
         jButton1.setFont(new java.awt.Font("Trebuchet MS", 0, 11)); // NOI18N
         jButton1.setText("Ok");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Ok(evt);
+                btnOk(evt);
             }
         });
 
         jScrollPane3.setViewportView(jTextPane2);
 
         jButton2.setText("Atras");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Listado Empleados");
 
@@ -98,7 +109,12 @@ public class BajaEmpleado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Ok(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ok
+    private void btnOk(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOk
+       ok();
+    }//GEN-LAST:event_btnOk
+
+    private void ok()
+    {
         eLegajo = legajo.getText();
         conexion.Conectar();
         try{
@@ -115,8 +131,8 @@ public class BajaEmpleado extends javax.swing.JFrame {
         catch(SQLException ex){
             System.out.println(ex);
         }
-    }//GEN-LAST:event_Ok
-
+    }
+    
     private void DarBaja(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DarBaja
         try{
             conexion.setS(conexion.getConexion().createStatement());
@@ -129,6 +145,18 @@ public class BajaEmpleado extends javax.swing.JFrame {
             System.out.println(ex);
         }
     }//GEN-LAST:event_DarBaja
+
+    private void EnterLegajo(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EnterLegajo
+        if(evt.getKeyChar() == 10)
+        {
+            ok();
+        }
+    }//GEN-LAST:event_EnterLegajo
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.setVisible(false);
+        new VistaGerente().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

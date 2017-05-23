@@ -52,17 +52,34 @@ public class LogIn extends javax.swing.JFrame {
 
         jLabel6.setText("Contraseña");
 
+        tfNombreInicio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                InsertUsersNames(evt);
+            }
+        });
+
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Iniciar Sesion");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IniciarSesion(evt);
+                BtnIniciarSesion(evt);
+            }
+        });
+
+        tfContraseñaInicio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterPw(evt);
             }
         });
 
         jLabel2.setText("Tipo");
 
         tipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "empleado", "gerente" }));
+        tipoUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterTipo(evt);
+            }
+        });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/vaca1.png"))); // NOI18N
 
@@ -134,7 +151,12 @@ public class LogIn extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void IniciarSesion(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarSesion
+    private void BtnIniciarSesion(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIniciarSesion
+        IniciarSesion();        
+    }//GEN-LAST:event_BtnIniciarSesion
+
+    private void IniciarSesion()
+    {
         int tipo = -1;
         Object e = tipoUsuario.getSelectedItem();
         String cargo = String.valueOf(e);
@@ -180,9 +202,33 @@ public class LogIn extends javax.swing.JFrame {
             
         } catch (SQLException ex) {
             System.out.println(ex);
-        }  
-        
-    }//GEN-LAST:event_IniciarSesion
+        } 
+    }
+    private void EnterPw(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EnterPw
+        if(evt.getKeyChar() == 10)
+        {
+            IniciarSesion();
+        }
+    }//GEN-LAST:event_EnterPw
+
+    private void EnterTipo(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EnterTipo
+        if(evt.getKeyChar() == 10)
+        {
+            IniciarSesion();
+        }
+    }//GEN-LAST:event_EnterTipo
+
+    private void InsertUsersNames(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_InsertUsersNames
+         if((tfNombreInicio.getText().length() == 0) && (evt.getKeyChar() == 108 || evt.getKeyChar() == 103))
+         {
+            evt.consume();
+            if(evt.getKeyChar() == 108){
+                tfNombreInicio.setText("Lautaro"); 
+            }else{
+                tfNombreInicio.setText("gianni");
+            }            
+         }
+    }//GEN-LAST:event_InsertUsersNames
 
     public static void main(String args[]) {
         

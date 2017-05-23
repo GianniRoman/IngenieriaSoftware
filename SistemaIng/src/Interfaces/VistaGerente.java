@@ -60,6 +60,11 @@ public class VistaGerente extends javax.swing.JFrame {
         });
 
         jButton5.setText("Salir");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverAInicio(evt);
+            }
+        });
 
         Hora.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
@@ -122,6 +127,11 @@ public class VistaGerente extends javax.swing.JFrame {
             this.setVisible(false);
             new ContratarEmpleado().setVisible(true);
     }//GEN-LAST:event_LlamadoAContratarEmpleado
+
+    private void VolverAInicio(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverAInicio
+        this.setVisible(false);
+        new LogIn().setVisible(true);
+    }//GEN-LAST:event_VolverAInicio
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
